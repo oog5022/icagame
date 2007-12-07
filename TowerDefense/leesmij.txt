@@ -1,0 +1,11 @@
+De map 'doc' bevat de API-documentatie van de phonegame package.
+Open 'index.html' om de API te lezen.
+
+De map 'vissenspel' is de projectmap van het non-game 'vissenspel',
+maak in deze map het eclipse-project om het voorbeldspel te bekijken.
+
+De projectmap van je eigen spel moet dezelfde structuur hebben, kies
+dan wel een geschikte naam voor de package van je game en kies ook een
+goede naam voor je projectmap: de jad- en jar-file, die je gebruikt om
+je spel zelfstandig te runnen, krijgen namelijk dezelfde naam als je
+projectmap.
