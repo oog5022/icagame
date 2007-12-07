@@ -1,11 +1,22 @@
-De map 'doc' bevat de API-documentatie van de phonegame package.
-Open 'index.html' om de API te lezen.
+Problemen:
 
-De map 'vissenspel' is de projectmap van het non-game 'vissenspel',
-maak in deze map het eclipse-project om het voorbeldspel te bekijken.
+Hij vind nog steeds het compilen niet leuk, dit maal crashed hij op het niet kunnen vinden van "res/images/player.png" deze zit wel in de map dus ik snap er weer eens niets van!
+verder kwam ik voorbij die andere error met Project->Properties->Java->Compiler->enable "project specific settings" and then set "Java Compliance Level" to 1.4. 
+Hopen dat het hier nog mee gaat werken!
 
-De projectmap van je eigen spel moet dezelfde structuur hebben, kies
-dan wel een geschikte naam voor de package van je game en kies ook een
-goede naam voor je projectmap: de jad- en jar-file, die je gebruikt om
-je spel zelfstandig te runnen, krijgen namelijk dezelfde naam als je
-projectmap.
+TODO:
+Graphics:
+Torens maken in Photoshop
+Enemy's maken in Photoshop
+Tiles mooier? Weg maken/towerplaats-rotsen(tile 1 & 2)
+Eindblokje (tile4)
+
+Source:
+BaseTower uitbreiden naar 5 torens ofzo + unieke algorithmes
+BaseProjectile uitbreiden naar de projectiles van torens
+Mob, verschillende mobs? algorithme voor mobs op andere skill lvl
+Highscore maken voor eindscherm
+--En nog veel meer!
+----------------------
+
+Highland
