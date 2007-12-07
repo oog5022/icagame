@@ -16,6 +16,8 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	
 	private int level;
 	private int time;
+	private int lifes;
+	private int cash;
 	
 	public TowerDefense()
 	{
@@ -23,17 +25,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 
 		setBounds(0, 0, 240, 260);
 		setBackgroundColor(0, 0, 0);
-		
-		db = new GameDashboard();
-		db.setForegroundColor(255,255,255);
-		db.setBackgroundColor(0,0,0);
-		db.setSize(240,30);
-		db.setPosition(0, 260);
-		db.addItem("Score", "0");
-		db.addItem("Level", "0");
-		db.addItem("Cash", "$ 0");
-		db.addItem("Time", "00:00");
-		addGameDashboard(db);
 		
 		makeMenu(menu, this);
 		
@@ -44,6 +35,20 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		
 		level = 1;
 		time = 0;
+		lifes = 20;
+		cash = 100;
+		
+		db = new GameDashboard();
+		db.setForegroundColor(255,255,255);
+		db.setBackgroundColor(0,0,0);
+		db.setSize(240,30);
+		db.setPosition(0, 260);
+		db.addItem("Score", "0");
+		db.addItem("Level", "" + level);
+		db.addItem("Lifes", "" + lifes);
+		db.addItem("Cash", "$ " + cash);
+		db.addItem("Time", "00:00");
+		addGameDashboard(db);
 		
 		setTimer(10, 0, this);
 		startGame();
@@ -71,7 +76,8 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	    {
 	    	"/res/images/grass.png", // 1
 	        "/res/images/path.png", // 2
-	        "/res/images/wall.png" // 3
+	        "/res/images/wall.png", // 3
+	        "/res/images/end.png" // 4
 	    };
 	    // create map
 	    byte[][] map = 
