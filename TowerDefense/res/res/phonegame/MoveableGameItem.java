@@ -2,7 +2,7 @@
  * File: 	MoveableGameItem.java
  * Created: Jan 23, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import phonegame.utils.Tools;
 
@@ -666,8 +666,8 @@ public abstract class MoveableGameItem extends GameItem
      *                the position of the collision: x when horizontal, y when vertical You pass these two parameters on
      *                when using bounce(horizontal, position) or moveUpto(horizontal, position).
      * 
-     * @see phonegame.MoveableGameItem#undoMove()
-     * @see phonegame.MoveableGameItem#bounce(boolean, int)
+     * @see res.phonegame.MoveableGameItem#undoMove()
+     * @see res.phonegame.MoveableGameItem#bounce(boolean, int)
      * @see phonegame.MoveableGameItem#moveUpto(boolean, int).
      */
     public void collisionOccured(int tilePattern, boolean horizontal, int position)

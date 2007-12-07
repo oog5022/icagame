@@ -1,7 +1,7 @@
 //Gemaakt Door Rick
 package towerdefense;
 
-import phonegame.*;
+import res.phonegame.*;
 
 public class TowerDefense extends GameEngine implements IMenuListener, IAlarmListener
 {

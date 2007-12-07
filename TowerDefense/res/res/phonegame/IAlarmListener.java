@@ -2,7 +2,7 @@
  * File: 	IAlarmListener.java
  * Created: Jan 29, 2005
  */
-package phonegame;
+package res.phonegame;
 
 /**
  * Use this interface if you want to receive timer/alarm events

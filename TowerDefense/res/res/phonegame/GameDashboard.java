@@ -2,7 +2,7 @@
  * File: 	GameDashboard.java
  * Created: Jan 27, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import javax.microedition.lcdui.*;
 import javax.microedition.midlet.*;

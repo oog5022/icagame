@@ -2,7 +2,7 @@
  * File: 	GamePersistence.java 
  * Created: Jan 31, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import javax.microedition.rms.*;
 

@@ -2,7 +2,7 @@
  * File: 	IStepListener.java
  * Created: Apr 25, 2005
  */
-package phonegame;
+package res.phonegame;
 
 /**
  * Use this interface if you want to receive step events

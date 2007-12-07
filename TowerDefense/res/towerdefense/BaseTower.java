@@ -1,6 +1,6 @@
 package towerdefense;
 
-import phonegame.*;
+import res.phonegame.*;
 
 public class BaseTower extends GameItem implements IAlarmListener
 {

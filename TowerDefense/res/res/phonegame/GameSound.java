@@ -2,7 +2,7 @@
  * File: 	GameSound.java
  * Created: Jan 26, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import java.io.*;
 
@@ -120,7 +120,7 @@ public final class GameSound
      * does this at an incoming call). <br/>
      * Does nothing if no background sound is playing.
      *  
-     * @see phonegame.GameSound#resumeBackgroundSound()
+     * @see res.phonegame.GameSound#resumeBackgroundSound()
      * 
      * @param temporarily true if you want to resume the sound later on, false if you really stop it
      */
@@ -137,7 +137,7 @@ public final class GameSound
      * Resume playing a background sound or music, that has been stopped temorarily. <br/>
      * Does nothing if there is no background sound or if it is already playing, 
      * 
-     * @see phonegame.GameSound#stopBackgroundSound(boolean temporarily)
+     * @see res.phonegame.GameSound#stopBackgroundSound(boolean temporarily)
      */
     public static final void resumeBackgroundSound()
     {

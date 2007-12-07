@@ -2,7 +2,7 @@
  * File: 	GameForm.java
  * Created: Jan 24, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import javax.microedition.lcdui.*;
 import phonegame.utils.Tools;

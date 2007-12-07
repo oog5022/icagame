@@ -2,7 +2,7 @@
  * File: 	GamePlayer.java 
  * Created: Jan 18, 2005 
  */
-package phonegame;
+package res.phonegame;
 
 /**
  * This class represents the player figure in the game. Descendants of this class need to handle the keyboard events

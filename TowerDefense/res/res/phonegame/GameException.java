@@ -2,7 +2,7 @@
  * File: 	GameException.java
  * Created: Jan 23, 2005
  */
-package phonegame;
+package res.phonegame;
 
 /**
  * Custom exception class to handle exceptions thrown by the GameAPI.

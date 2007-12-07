@@ -2,7 +2,7 @@
  * File: 	GameItem.java
  * Created: Jan 17, 2005
  */
-package phonegame;
+package res.phonegame;
 
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;

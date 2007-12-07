@@ -2,7 +2,7 @@
  * File: 	IMenuListener.java
  * Created: Jan 22, 2005
  */
-package phonegame;
+package res.phonegame;
 
 /**
  * Use this interface if you want to receive menu events
