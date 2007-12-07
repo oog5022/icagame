@@ -12,7 +12,8 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private static final String rocketTowerMenuItem = "Build: Rocket Tower";
 	private static final String spacerMenuItem = "---";
 	private static final String exitMenuItem = "Exit";
-	private static final String[] menu = {rocketTowerMenuItem, spacerMenuItem, exitMenuItem};
+	private static final String removeTower = "Verwijder Toren";
+	private static final String[] menu = {rocketTowerMenuItem, spacerMenuItem, removeTower, exitMenuItem};
 	
 	private int level;
 	private int time;
@@ -69,6 +70,13 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				}
 			}
 		}
+		else if( label.equals(removeTower))
+		{
+			if( (findItemAt(player.getX(), player.getY(), 1, 1) instanceof BaseTower) == true ) //check whether its a tower or not.
+				{
+				// Ik kom hier maar niet uit!
+				}
+		}
 	}
 	
 	public void setPoints(int p)
@@ -89,24 +97,24 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	    	"/res/images/grass.png", // 1
 	        "/res/images/path.png", // 2
 	        "/res/images/wall.png", // 3
-	        // "/res/images/end.png" // 4
+	        "/res/images/end.png" // 4
 	    };
 	    // create map
 	    byte[][] map = 
 	    {
-		        {1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2},
-		        {2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1},
 		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1},
-		        {1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1}
+		        {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
+		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
+		        {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1},
+		        {1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1},
+		        {1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1},
+		        {1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1},
+		        {1, 2, 1, 2, 1, 4, 2, 2, 1, 2, 1, 2, 1},
+		        {1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1},
+		        {1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1},
+		        {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
+		        {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
+		        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	    };
 	    
 	    // add map

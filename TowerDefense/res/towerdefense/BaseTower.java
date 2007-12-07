@@ -66,4 +66,11 @@ public class BaseTower extends GameItem implements IAlarmListener
 			}
 		}
 	}
+	
+	public void deleteTower()
+	{
+		this.isActive = false;
+		this.firerate = 0;
+		setImage("/res/images/grass.png", 20, 20);
+	}
 }
