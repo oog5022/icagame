@@ -1,6 +1,7 @@
 package towerdefense;
 
 import phonegame.*;
+import phonegame.utils.*;
 
 public abstract class BaseTower extends GameItem implements IAlarmListener
 {
@@ -29,8 +30,45 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
         mygame.setTimer(firerate, 0, this);
 	}
 	
+	/* DEV-note:
+	 *      Nodig voor bepalen van de richting van de toren om later te gebruiken voor een plaatje
+	 *      Richting zelfde als bij Mob.java
+	 * 
+	 * Waarschijnlijk per:
+	 *    0 - 45 - 90 - enz...
+	 *    9 in totaal
+	 */
+	
+	protected double facing()
+	{
+        int dx = target.getX() - getX();
+        int dy = target.getY() - getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        double sindir = dy/distance;
+        double cosdir = dx/distance;
+        double radians;
+
+        if ( Math.abs(cosdir) < Math.abs(sindir) )
+        {
+            if ( sindir < 0 )
+                radians = Math.PI/2 - Tools.arcsin(cosdir);
+            else
+            	radians = Math.PI + Math.PI/2 + Tools.arcsin(cosdir);
+        } else
+        {
+            if ( cosdir > 0 )
+            	radians = Tools.arcsin(-sindir);
+            else
+            	radians = Math.PI - Tools.arcsin(-sindir);
+        }
+
+        return (360+Tools.round(Math.toDegrees(radians)))%360;
+	}
+	
 	protected void fire()
 	{
+		System.out.println("Shoot at: " + facing() + "'");
+		
 		BaseProjectile projectile = new BaseProjectile(mygame, target);
 		projectile.setPosition(this.getX(), this.getY());
 		
