@@ -8,6 +8,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
     private Player player;
 
 	private GameDashboard db;
+	private MapController mc;
 	
 	private static final String rocketTowerMenuItem = "Build: Rocket Tower";
 	private static final String spacerMenuItem = "---";
@@ -52,6 +53,8 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		addGameDashboard(db);
 		
 		buildEnvironment();
+		
+		mc = new MapController(this);
 		
 		setTimer(10, 0, this);
 		startGame();

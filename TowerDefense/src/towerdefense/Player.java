@@ -23,17 +23,17 @@ public class Player extends GamePlayer
 	
 	public void pressedButtonB()
 	{
-		// 2
+		// 3
 	}
 	
 	public void pressedButtonC()
 	{
-		// 3
+		// 7
 	}
 	
 	public void pressedButtonD()
 	{
-		// 4
+		// 9
 	}
 	
 	public void moveDown()
