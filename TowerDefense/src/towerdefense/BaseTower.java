@@ -30,17 +30,11 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
         mygame.setTimer(firerate, 0, this);
 	}
 	
-	/* DEV-note:
-	 *      Nodig voor bepalen van de richting van de toren om later te gebruiken voor een plaatje
-	 *      Richting zelfde als bij Mob.java
-	 * 
-	 * Waarschijnlijk per:
-	 *    0 - 45 - 90 - enz...
-	 *    9 in totaal
-	 */
-	
-	protected double facing()
+	private final double facing()
 	{
+		if(target == null)
+			return 0f;
+		
         int dx = target.getX() - getX();
         int dy = target.getY() - getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -68,7 +62,6 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	private void drawFacing()
 	{
 		int index = (int)Math.floor(facing() / 45);
-		System.out.println(index + " / " + getFrameCount());
 		this.setFrame( index  );
 	}
 	
