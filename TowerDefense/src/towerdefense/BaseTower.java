@@ -65,10 +65,15 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
         return (360+Tools.round(Math.toDegrees(radians)))%360;
 	}
 	
-	protected void fire()
+	private void drawFacing()
 	{
-		System.out.println("Shoot at: " + facing() + "'");
-		
+		int index = (int)Math.floor(facing() / 45);
+		System.out.println(index + " / " + getFrameCount());
+		this.setFrame( index  );
+	}
+	
+	protected void fire()
+	{		
 		BaseProjectile projectile = new BaseProjectile(mygame, target);
 		projectile.setPosition(this.getX(), this.getY());
 		
@@ -99,6 +104,7 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		{
 			if(isActive)
 			{
+				drawFacing();
 				fire();
 				mygame.setTimer(firerate, 0, this);
 			}

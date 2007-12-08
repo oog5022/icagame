@@ -12,7 +12,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		setImage("/images/Mob1.png");
 		
 		// Speedhack much?
-		setSpeed(10);
+		setSpeed(2);
 		startMoving();
 	}
 	
