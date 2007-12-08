@@ -2,6 +2,7 @@
 package towerdefense;
 
 import res.phonegame.*;
+import java.util.*;
 
 public class TowerDefense extends GameEngine implements IMenuListener, IAlarmListener
 {
@@ -19,6 +20,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private int time;
 	private int lifes;
 	private int cash;
+	public Object[] towerList;
 	
 	public TowerDefense()
 	{
@@ -67,14 +69,24 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 					bt.setPosition(player.getX(), player.getY());
 					bt.lockTarget(player);
 					addGameItem(bt);
+					//bt = towerList[].next; object should be numbered so the specific object can be deleted (I guess)
+					//deleteGameItem(bt); works here...
 				}
 			}
 		}
-		else if( label.equals(removeTower))
+		if( label.equals(removeTower))
 		{
 			if( (findItemAt(player.getX(), player.getY(), 1, 1) instanceof BaseTower) == true ) //check whether its a tower or not.
 				{
-				// Ik kom hier maar niet uit!
+				//this.deleteGameItem(towerList[bt])
+				// Ik kom hier maar niet uit! Im stuck here!
+				/*
+			    public void deleteGameItem(GameItem item)
+    			{
+        			item.setGiState(GameItem.DELETED);
+    			}
+				*/
+				
 				}
 		}
 	}

@@ -17,7 +17,7 @@ BaseTower expanding to 5 towers (or something like that) + unique algorithms
 BaseProjectile expanding to tower projectiles (unique projectile's)
 Mob, different mobs(maybe just 1 sort) algorithm for different skill lvled mobs
 Endscreen Highscore
-RemoveScript BaseTower (BaseTower.java line 77)
+RemoveScript BaseTower (TowerDefense.java line 77)
 --And loads more!!
 ----------------------
 

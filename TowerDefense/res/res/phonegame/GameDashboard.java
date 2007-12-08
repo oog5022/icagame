@@ -5,7 +5,6 @@
 package res.phonegame;
 
 import javax.microedition.lcdui.*;
-import javax.microedition.midlet.*;
 import phonegame.utils.Tools;
 
 /**
