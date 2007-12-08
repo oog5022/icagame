@@ -20,7 +20,7 @@ public class Mob extends MoveableGameItem implements IAlarmListener
 	public void alarm(int id)
 	{
 		if(id == 0) // walk control
-		{
+		{			
 			if( getX() >= 0 && getX() < 220 && getY() >= 20 && getY() < 40 )
 			{
 				this.setDirection(0);
@@ -30,6 +30,14 @@ public class Mob extends MoveableGameItem implements IAlarmListener
 			{
 				this.setDirection(270);
 				mygame.setTimer(1, 0, this);
+			}
+			if( findTilesAt(getX(), getY(), 1, 1) == 1 ) // check tile
+			{
+			this.setDirection(90); // Right
+			}
+			else ( findTilesAt(getX(), getY(), 1, 1) == 1 ) // check tile
+			{
+			this.setDirection(270); // Left
 			}
 		}
 	}
