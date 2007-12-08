@@ -2,30 +2,30 @@ package towerdefense;
 
 import phonegame.*;
 
-public class BaseTower extends GameItem implements IAlarmListener
+public abstract class BaseTower extends GameItem implements IAlarmListener
 {
-	private TowerDefense mygame;
-	private int firerate;
-	private boolean isActive;
-	private MoveableGameItem target;
-	private BaseProjectile projectile;
+	protected TowerDefense mygame;
+	protected boolean isActive;
+	protected MoveableGameItem target;
+	protected BaseProjectile projectile;
 	
 	// Upgrades
-	private int distancelevel;
-	private int fireratelevel;
-	private int powerlevel;
+	protected int distancelevel;
+	protected int fireratelevel;
+	protected int powerlevel;
+	
+	protected int firerate;
 	
 	public BaseTower(TowerDefense game)
 	{
 		super();
 		
 		mygame = game;
-		firerate = 25;
 		isActive = true;
 		
+		firerate = 25;
         setImage("/images/wall.png", 20, 20);
         
-        // DEBUG: fire
         mygame.setTimer(firerate, 0, this);
 	}
 	

@@ -11,16 +11,16 @@ public class MapController implements IAlarmListener
 	private int startx;
 	private int starty;
 	
-	public MapController(TowerDefense game)
+	public MapController(TowerDefense game, int level)
 	{
 		active = true;
 		mygame = game;
-		spawningMobs = 1;
+		spawningMobs = 5;
 		
 		startx = 0;
 		starty = 20;
 		
-		mygame.setTimer(30, 0, this);
+		alarm(0);
 	}
 	
 	public void alarm(int id)
@@ -28,6 +28,7 @@ public class MapController implements IAlarmListener
 		if(id == 0) // spawn control
 		{
 			spawnMob();
+			mygame.setTimer(10, 0, this);
 		}
 	}
 	

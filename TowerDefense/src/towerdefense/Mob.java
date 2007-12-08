@@ -2,7 +2,7 @@ package towerdefense;
 
 import phonegame.*;
 
-public class Mob extends MoveableGameItem implements IAlarmListener
+public class Mob extends MoveableGameItem // implements IAlarmListener
 {
 	private TowerDefense mygame;
 	
@@ -11,34 +11,59 @@ public class Mob extends MoveableGameItem implements IAlarmListener
 		mygame = game;
 		setImage("/images/Mob1.png");
 		
-		mygame.setTimer(1, 0, this);
-		
-		setSpeed(2);
+		// Speedhack much?
+		setSpeed(10);
 		startMoving();
 	}
 	
-	public void alarm(int id)
+	/*
+	 * DEV-notes:
+	 * Compas
+	 *     90
+	 *      |
+	 * 180 -+- 0
+	 *      |
+	 *     270
+	 */
+	
+	public int checkDir()
 	{
-		if(id == 0) // walk control
-		{			
-			if( getX() >= 0 && getX() < 220 && getY() >= 20 && getY() < 40 )
-			{
-				this.setDirection(0);
-				mygame.setTimer(1, 0, this);
-			}
-			else if( getX() == 220 )
-			{
-				this.setDirection(270);
-				mygame.setTimer(1, 0, this);
-			}
-			if( findTilesAt(getX(), getY(), 1, 1) == 1 ) // check tile
-			{
-			this.setDirection(90); // Right
-			}
-			else ( findTilesAt(getX(), getY(), 1, 1) == 1 ) // check tile
-			{
-			this.setDirection(270); // Left
-			}
+		int dir = getDirection();
+		int temp = 999;
+		
+		// Move back
+		if(dir == 270)
+			setPosition(getX(), ((int) (getY() - getSpeed())));
+		else if(dir == 0)
+			setPosition(((int) (getX() - getSpeed())), getY());
+		else if(dir == 90)
+			setPosition(getX(), ((int) (getY() + getSpeed())));
+		else if(dir == 180)
+			setPosition(((int) (getX() + getSpeed())), getY());
+		
+		
+		temp = dir;
+
+		if( temp != 180 && mygame.findTilesAt(getX() + getFrameWidth(), getY(), 1, 1) == 2 )
+			dir = 0;
+		else if ( temp != 90 && mygame.findTilesAt(getX(), getY() + getFrameHeight(), 1, 1) == 2 )
+			dir = 270;
+		else if ( temp != 0 && mygame.findTilesAt(getX() - getFrameWidth(), getY(), 1, 1) == 2 )
+			dir = 180;
+		else if ( temp != 270 && mygame.findTilesAt(getX(), getY() - getFrameHeight(), 1, 1) == 2 )
+			dir = 90;
+		
+		return dir;
+	}
+	
+	public void collisionOccured(int tilePattern, boolean horizontal, int position)
+	{
+		if(tilePattern != 2 && tilePattern != 8)
+			setDirection(checkDir());	
+		else if(tilePattern == 8)
+		{
+			mygame.decLife();
+			mygame.deleteGameItem(this);
 		}
 	}
 	

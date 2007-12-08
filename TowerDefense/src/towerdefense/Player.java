@@ -5,12 +5,14 @@ import phonegame.*;
 public class Player extends GamePlayer
 {
 	private TowerDefense mygame;
+	public String name;
 	
 	public Player(TowerDefense game)
 	{
 		super();
 		
 		mygame = game;
+		name = "pl";
 		
         setImage("/images/player.png", 20, 20);
         setPosition(40, 40);

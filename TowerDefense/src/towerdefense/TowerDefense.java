@@ -3,7 +3,7 @@ package towerdefense;
 
 import phonegame.*;
 
-public class TowerDefense extends GameEngine implements IMenuListener, IAlarmListener
+public class TowerDefense extends GameEngine implements IMenuListener, IAlarmListener, IStepListener
 {
     private Player player;
 
@@ -21,8 +21,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private int lifes;
 	private int cash;
 	
-	private Object[] towerList;
-	
 	public TowerDefense()
 	{
 		super();
@@ -36,9 +34,9 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	    this.addPlayer(player);
 		
 		level = 1;
-		time = 0;
 		lifes = 20;
 		cash = 100;
+		resetTime();
 		
 		db = new GameDashboard();
 		db.setForegroundColor(255,255,255);
@@ -54,8 +52,9 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		
 		buildEnvironment();
 		
-		mc = new MapController(this);
+		mc = new MapController(this, level);
 		
+		addStepListener(this);
 		setTimer(10, 0, this);
 		startGame();
 	}
@@ -68,10 +67,10 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			{
 				if( (findItemAt(player.getX(), player.getY(), 1, 1) instanceof BaseTower) == false ) // Not building on another tower?
 				{
-					BaseTower bt = new BaseTower(this);
-					bt.setPosition(player.getX(), player.getY());
-					bt.lockTarget(player);
-					addGameItem(bt);
+					BaseTower rt = new RocketTower(this);
+					rt.setPosition(player.getX(), player.getY());
+					rt.lockTarget(player);
+					addGameItem(rt);
 				}
 			}
 		}
@@ -84,11 +83,26 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				deleteGameItem(tower);
 			}
 		}
+		else if ( label.equals(exitMenuItem) )
+	    {
+	        exitGame();
+	    } 
 	}
 	
 	public void setPoints(int p)
 	{
 		// sd.setItemValue("Score", "" + p);
+	}
+	
+	public void decLife()
+	{
+		lifes--;
+		db.setItemValue("HP", Integer.toString(lifes) + " ");
+	}
+	
+	public void resetTime()
+	{
+		time = 30;
 	}
 	
 	public void incLevel()
@@ -101,10 +115,10 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	{   // get path to tile images
 	    String[] imagePaths =
 	    {
-	    	"/images/grass.png", // 1
-	        "/images/path.png", // 2
-	        "/images/wall.png", // 3
-	        "/images/end.png" // 4
+	    	"/images/grass.png", // 1 - HEX: 1
+	        "/images/path.png", // 2 - HEX: 2
+	        "/images/wall.png", // 3 - HEX: 4
+	        "/images/end.png" // 4 - HEX: 8
 	    };
 	    // create map
 	    byte[][] map = 
@@ -133,24 +147,36 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	{
 		if(id == 0) // Game Timer
 		{
-			time++;
+			time--;
 			
-			int seconds = time % 60;
-			int minutes = time - seconds;
-			
-			String outseconds = "";
-			if( seconds < 10 )
-				outseconds += "0";
-			outseconds += seconds;
-			
-			String outminutes = "";
-			if( minutes < 10 )
-				outminutes += "0";
-			outminutes += minutes;
-			
-			db.setItemValue("Time", outminutes + ":" + outseconds );
+			db.setItemValue("Time", Integer.toString(time) );
 			
 			setTimer(10, 0, this);
+		}
+	}
+	
+	public void stepAction(int stepnr)
+	{
+		// Check Lifes (game ends at, lifes == 0)
+		if(lifes == 0)
+		{
+			db.deleteItem("LVL");
+			db.deleteItem("HP");
+			db.deleteItem("Cash");
+			db.deleteItem("Time");
+			
+			db.setBackgroundColor(255, 0, 0);
+			db.setForegroundColor(0, 0, 0);
+			db.setFont(true, false, false);
+			db.addItem("You've Lost The Game", "Yet, made it till level " + level);
+			stopGame();
+		}
+		
+		else if(time == 0) // Respawn
+		{
+			resetTime();
+			incLevel();
+			mc = new MapController(this, level);
 		}
 	}
 }
