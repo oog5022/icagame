@@ -71,10 +71,12 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	
 	protected void fire()
 	{
+		/*
 		BaseProjectile projectile = new BaseProjectile(mygame, target, this);
 		projectile.setPosition(this.getX(), this.getY());
 		
 		mygame.addGameItem(projectile);
+		*/
 	}
 	
 	protected void lockTarget(Mob pointer)
@@ -99,12 +101,13 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	{
 		if(id == 0) // Fire
 		{
-			if(isActive && target != null)
+			if(target != null && target.getActive() == true)
 			{
 				drawFacing();
 				fire();
-				mygame.setTimer(firerate, 0, this);
 			}
+			
+			mygame.setTimer(firerate, 0, this);
 		}
 		else if(id == 1)
 		{
@@ -112,8 +115,6 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 			
 			if(target == null)
 			{
-				System.out.println("New");
-
 				Vector items = mygame.getItemsOfType("Mob");
 				
 				for(int i=0; i < items.size(); i++)
@@ -133,8 +134,6 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 			}
 			else
 			{
-				System.out.println("Check");
-				
 				if( target.getActive() == false  )
 				{
 					target = null;
@@ -144,9 +143,7 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 				int dx = (target.getX() + target.getFrameWidth() / 2) - (this.getX() + this.getFrameWidth() / 2);
 				int dy = (target.getY() + target.getFrameHeight() / 2) - (this.getY() + this.getFrameHeight() / 2);
 				double distance = Math.sqrt(dx * dx + dy * dy);
-					
-			    System.out.println(distance);
-		        
+        
 				if(distance > maxdist)
 					target = null;
 			}

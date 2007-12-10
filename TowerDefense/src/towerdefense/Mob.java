@@ -74,6 +74,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		if(object instanceof BaseProjectile)
 		{
 			((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
+			active = false;
 			
 			mygame.deleteGameItem(this);
 			mygame.deleteGameItem(object);

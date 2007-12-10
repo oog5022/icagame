@@ -2,13 +2,13 @@ package towerdefense;
 
 import phonegame.*;
 
-public class BaseProjectile extends MoveableGameItem implements IStepListener
+public abstract class BaseProjectile extends MoveableGameItem implements IStepListener
 {
 	private TowerDefense mygame;
-	private MoveableGameItem target;
+	private Mob target;
 	private BaseTower parent;
 	
-	public BaseProjectile(TowerDefense game, MoveableGameItem pointer, BaseTower p)
+	public BaseProjectile(TowerDefense game, Mob pointer, BaseTower p)
 	{
 		super();
 		
@@ -30,8 +30,7 @@ public class BaseProjectile extends MoveableGameItem implements IStepListener
 	
 	public void stepAction(int stepnr)
 	{
-		if(stepnr % 5 == 0) // Mover
-			moveTowardsAPoint(target.getX(), target.getY());
+		moveTowardsAPoint(target.getX(), target.getY());
 	}
 	
 	public void collisionOccured(GameItem collidedItem)
