@@ -6,6 +6,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 {
 	private TowerDefense mygame;
 	private boolean active;
+	private int health;
 	
 	public Mob(TowerDefense game)
 	{
@@ -13,9 +14,23 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		active = true;
 		setImage("/images/Mob1.png");
 		
+		setHP(10, 1.1, mygame.getLevel());
+		
 		// Speedhack much?
 		setSpeed(2);
 		startMoving();
+	}
+	
+	public void setHP(double basehp, double inc, int level)
+	{
+		health = 1;
+		
+		for(int i = 0; i < level; i++)
+		{
+			health *= inc;
+		}
+		
+		health += basehp;
 	}
 	
 	/*

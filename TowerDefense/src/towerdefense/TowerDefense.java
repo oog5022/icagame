@@ -36,7 +36,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		level = 1;
 		lifes = 20;
 		cash = 100;
-		resetTime();
+		time = 10;
 		
 		db = new GameDashboard();
 		db.setForegroundColor(255,255,255);
@@ -52,7 +52,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		
 		buildEnvironment();
 		
-		mc = new MapController(this, level);
+		// mc = new MapController(this, level);
 		
 		addStepListener(this);
 		setTimer(10, 0, this);
@@ -86,6 +86,11 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	    {
 	        exitGame();
 	    } 
+	}
+	
+	public int getLevel()
+	{
+		return level;
 	}
 	
 	public void setPoints(int p)

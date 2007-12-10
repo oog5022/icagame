@@ -16,7 +16,6 @@ public abstract class BaseProjectile extends MoveableGameItem implements IStepLi
 		target = pointer;
 		parent = p;
 		
-		setImage("/images/appel.png", 15, 15);
 		setSpeed(5);
 		startMoving();
 		
