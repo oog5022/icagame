@@ -23,10 +23,8 @@ public class BaseProjectile extends MoveableGameItem implements IStepListener
 	
 	public void stepAction(int stepnr)
 	{
-		if(stepnr % 2 == 0) // Mover
-		{
+		if(stepnr % 5 == 0) // Mover
 			moveTowardsAPoint(target.getX(), target.getY());
-		}
 	}
 	
 	public void collisionOccured(GameItem collidedItem)
