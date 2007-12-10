@@ -5,10 +5,12 @@ import phonegame.*;
 public class Mob extends MoveableGameItem // implements IAlarmListener
 {
 	private TowerDefense mygame;
+	private boolean active;
 	
 	public Mob(TowerDefense game)
 	{
 		mygame = game;
+		active = true;
 		setImage("/images/Mob1.png");
 		
 		// Speedhack much?
@@ -67,8 +69,29 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		}
 	}
 	
+	public void collisionOccured(GameItem object)
+	{
+		if(object instanceof BaseProjectile)
+		{
+			((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
+			
+			mygame.deleteGameItem(this);
+			mygame.deleteGameItem(object);
+		}
+	}
+	
+	public void setActive(boolean a)
+	{
+		active = a;
+	}
+	
+	public boolean getActive()
+	{
+		return active;
+	}
+	
 	public void outsideWorld()
 	{
-		setPosition(0, 20);
+		mygame.deleteGameItem(this);
 	}
 }

@@ -6,19 +6,26 @@ public class BaseProjectile extends MoveableGameItem implements IStepListener
 {
 	private TowerDefense mygame;
 	private MoveableGameItem target;
+	private BaseTower parent;
 	
-	public BaseProjectile(TowerDefense game, MoveableGameItem pointer)
+	public BaseProjectile(TowerDefense game, MoveableGameItem pointer, BaseTower p)
 	{
 		super();
 		
 		mygame = game;
 		target = pointer;
+		parent = p;
 		
 		setImage("/images/appel.png", 15, 15);
 		setSpeed(5);
 		startMoving();
 		
 		mygame.addStepListener(this);
+	}
+	
+	public BaseTower getParent()
+	{
+		return parent;
 	}
 	
 	public void stepAction(int stepnr)
@@ -28,10 +35,5 @@ public class BaseProjectile extends MoveableGameItem implements IStepListener
 	}
 	
 	public void collisionOccured(GameItem collidedItem)
-	{
-		if(collidedItem instanceof Player)
-		{
-			mygame.deleteGameItem(this);
-		}
-	}
+	{ }
 }

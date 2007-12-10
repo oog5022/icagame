@@ -2,12 +2,13 @@ package towerdefense;
 
 import phonegame.*;
 import phonegame.utils.*;
+import java.util.Vector;
 
 public abstract class BaseTower extends GameItem implements IAlarmListener
 {
 	protected TowerDefense mygame;
 	protected boolean isActive;
-	protected MoveableGameItem target;
+	protected Mob target;
 	protected BaseProjectile projectile;
 	
 	// Upgrades
@@ -16,6 +17,7 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	protected int powerlevel;
 	
 	protected int firerate;
+	protected double maxdist;
 	
 	public BaseTower(TowerDefense game)
 	{
@@ -25,9 +27,11 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		isActive = true;
 		
 		firerate = 25;
+		maxdist = 50f;
         setImage("/images/wall.png", 20, 20);
         
         mygame.setTimer(firerate, 0, this);
+        mygame.setTimer(10, 1, this);
 	}
 	
 	private final double facing()
@@ -66,14 +70,14 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	}
 	
 	protected void fire()
-	{		
-		BaseProjectile projectile = new BaseProjectile(mygame, target);
+	{
+		BaseProjectile projectile = new BaseProjectile(mygame, target, this);
 		projectile.setPosition(this.getX(), this.getY());
 		
 		mygame.addGameItem(projectile);
 	}
 	
-	protected void lockTarget(MoveableGameItem pointer)
+	protected void lockTarget(Mob pointer)
 	{
 		target = pointer;
 	}
@@ -95,11 +99,56 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	{
 		if(id == 0) // Fire
 		{
-			if(isActive)
+			if(isActive && target != null)
 			{
 				drawFacing();
 				fire();
 				mygame.setTimer(firerate, 0, this);
+			}
+		}
+		else if(id == 1)
+		{
+			mygame.setTimer(10, 1, this);
+			
+			if(target == null)
+			{
+				System.out.println("New");
+
+				Vector items = mygame.getItemsOfType("Mob");
+				
+				for(int i=0; i < items.size(); i++)
+				{
+					Mob current = ((Mob) items.elementAt(i) );
+						
+					if(current != null)
+					{
+						int dx = (current.getX() + current.getFrameWidth() / 2) - (this.getX() + this.getFrameWidth() / 2);
+						int dy = (current.getY() + current.getFrameHeight() / 2) - (this.getY() + this.getFrameHeight() / 2);
+						double distance = Math.sqrt(dx * dx + dy * dy);
+						
+						if(distance <= maxdist)
+							target = current;
+					}
+				}
+			}
+			else
+			{
+				System.out.println("Check");
+				
+				if( target.getActive() == false  )
+				{
+					target = null;
+					return;
+				}
+				
+				int dx = (target.getX() + target.getFrameWidth() / 2) - (this.getX() + this.getFrameWidth() / 2);
+				int dy = (target.getY() + target.getFrameHeight() / 2) - (this.getY() + this.getFrameHeight() / 2);
+				double distance = Math.sqrt(dx * dx + dy * dy);
+					
+			    System.out.println(distance);
+		        
+				if(distance > maxdist)
+					target = null;
 			}
 		}
 	}

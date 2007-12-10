@@ -11,10 +11,10 @@ public class RocketTower extends BaseTower
 	}
 	
 	protected void fire()
-	{		
-		BaseProjectile projectile = new BaseProjectile(mygame, target);
-		projectile.setSpeed(1);
-		projectile.setPosition(this.getX(), this.getY());
+	{
+		BaseProjectile projectile = new BaseProjectile(mygame, target, this);
+		projectile.setSpeed(10);
+		projectile.setPosition(this.getX() + (this.getFrameWidth() / 2) - (projectile.getFrameWidth() / 2), this.getY() + (this.getFrameHeight() / 2) - (projectile.getFrameHeight() / 2));
 		
 		mygame.addGameItem(projectile);
 	}

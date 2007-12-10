@@ -69,7 +69,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				{
 					BaseTower rt = new RocketTower(this);
 					rt.setPosition(player.getX(), player.getY());
-					rt.lockTarget(player);
+					//rt.lockTarget(player);
 					addGameItem(rt);
 				}
 			}
