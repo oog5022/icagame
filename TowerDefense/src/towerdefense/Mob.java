@@ -8,17 +8,32 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 	private boolean active;
 	private int health;
 	
-	public Mob(TowerDefense game)
+	public Mob(TowerDefense game, int mobtype)
 	{
 		mygame = game;
 		active = true;
-		setImage("/images/Mob1.png");
+		switch(mobtype)
+		{
+		case 0:										// normal mob
+			setImage("/images/Mob1.png", 20, 20);	// image Mob1
+			setHP(10, 1.5, mygame.getLevel());		// startHP = 10
+			setSpeed(2);							// speed = 2
+			startMoving();
+		break;
+		case 1:										// speed mob (motor racer)
+			setImage("/images/Mob2.png", 20, 20);	// image Mob2
+			setHP(7, 1.5, mygame.getLevel());		// startHP = 7
+			setSpeed(4);							// speed = 4 (2*normal)
+			startMoving();
+		break;		
+		case 2:										// heavy mob (tank)
+			setImage("/images/Mob3.png", 20, 20);	// image Mob3
+			setHP(20, 1.5, mygame.getLevel());		// startHP = 20 (2*normal)
+			setSpeed(2);							// speed = 2
+			startMoving();
+		break;
 		
-		setHP(10, 1.5, mygame.getLevel());
-		
-		// Speedhack much?
-		setSpeed(2);
-		startMoving();
+		}		
 	}
 	
 	public void setHP(double basehp, double inc, int level)
@@ -45,6 +60,11 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 	 *     270
 	 */
 	
+	public void animate()
+	{
+		
+	}
+	
 	public int checkDir()
 	{
 		int dir = getDirection();
@@ -63,15 +83,26 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		
 		temp = dir;
 
-		if( temp != 180 && mygame.findTilesAt(getX() + getFrameWidth(), getY(), 1, 1) == 2 )
+		if( temp != 180 && mygame.findTilesAt(getX() + getFrameWidth(), getY(), 1, 1) == 2 ){
 			dir = 0;
+			this.setFrame(0);
+		}
+			
 		else if ( temp != 90 && mygame.findTilesAt(getX(), getY() + getFrameHeight(), 1, 1) == 2 )
+		{
 			dir = 270;
+			this.setFrame(1);
+		}
 		else if ( temp != 0 && mygame.findTilesAt(getX() - getFrameWidth(), getY(), 1, 1) == 2 )
+		{
 			dir = 180;
+			this.setFrame(2);
+		}
 		else if ( temp != 270 && mygame.findTilesAt(getX(), getY() - getFrameHeight(), 1, 1) == 2 )
+		{
 			dir = 90;
-		
+			this.setFrame(3);
+		}
 		return dir;
 	}
 	
