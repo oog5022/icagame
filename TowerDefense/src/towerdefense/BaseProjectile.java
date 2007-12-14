@@ -41,6 +41,9 @@ public abstract class BaseProjectile extends MoveableGameItem implements IStepLi
 	
 	public void stepAction(int stepnr)
 	{
+		if(target.isActive() == false)
+			mygame.removeStepListener(this);
+
 		moveTowardsAPoint(target.getX(), target.getY());
 	}
 	

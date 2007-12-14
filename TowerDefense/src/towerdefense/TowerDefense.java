@@ -170,7 +170,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	
 	public void resetTime()
 	{
-		time = 30;
+		time = 20;
 	}
 	
 	public void incLevel()

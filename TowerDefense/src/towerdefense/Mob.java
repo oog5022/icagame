@@ -14,7 +14,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		active = true;
 		setImage("/images/Mob1.png");
 		
-		setHP(10, 1.1, mygame.getLevel());
+		setHP(10, 1.5, mygame.getLevel());
 		
 		// Speedhack much?
 		setSpeed(2);
@@ -108,7 +108,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 				((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
 				active = false;
 			
-				mygame.addMoney( (int) Math.floor( 25 + mygame.getLevel() * 5) );
+				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) );
 				mygame.deleteGameItem(this);
 			}
 			

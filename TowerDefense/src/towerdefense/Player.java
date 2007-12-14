@@ -21,7 +21,7 @@ public class Player extends GamePlayer
 	public void pressedButtonA()
 	{
 		// 1
-		mygame.setMenu();
+		
 	}
 	
 	public void pressedButtonB()
@@ -85,6 +85,7 @@ public class Player extends GamePlayer
 	
 	public void fire()
 	{
+		mygame.setMenu();
 	}
 	
 	public void animate()
