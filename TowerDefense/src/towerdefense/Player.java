@@ -20,18 +20,36 @@ public class Player extends GamePlayer
 	
 	public void pressedButtonA()
 	{
-		// 1
+		if( mygame.getInMenu())
+		{
+			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
+			{
+				((BaseTower)tower).incPowerLevel();
+			}			
+		}
 		
 	}
 	
 	public void pressedButtonB()
 	{
-		// 3
+		if( mygame.getInMenu())
+		{
+			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
+			{
+				((BaseTower)tower).incFireRateLevel();
+			}			
+		}
 	}
 	
 	public void pressedButtonC()
 	{
-		// 7
+		if( mygame.getInMenu())
+		{
+			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
+			{
+				((BaseTower)tower).incDistanceLevel();
+			}			
+		}
 	}
 	
 	public void pressedButtonD()
