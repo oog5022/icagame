@@ -20,7 +20,8 @@ public class Player extends GamePlayer
 	
 	public void pressedButtonA()
 	{
-		// 1
+		
+		mygame.setMenu();
 	}
 	
 	public void pressedButtonB()
@@ -39,7 +40,9 @@ public class Player extends GamePlayer
 	}
 	
 	public void moveDown()
-	{
+	{	
+		if(mygame.getInMenu())
+				{mygame.buildMenu();}
         if(getY() + getFrameHeight() < mygame.getMaxY() )
         {	
             movePlayer(getX(), getY() + getFrameHeight());
@@ -48,6 +51,8 @@ public class Player extends GamePlayer
 	
 	public void moveUp()
 	{
+		if(mygame.getInMenu())
+		{mygame.buildMenu();}
         if(getY() - getFrameHeight() >= mygame.getMinY() )
         {	
             movePlayer(getX(), getY() - getFrameHeight());
@@ -56,6 +61,8 @@ public class Player extends GamePlayer
 	
 	public void moveLeft()
 	{
+		if(mygame.getInMenu())
+		{mygame.buildMenu();}
         if(getX() - getFrameWidth() >= mygame.getMinX() )
         {	
             movePlayer(getX() - getFrameWidth(), getY());
@@ -64,6 +71,8 @@ public class Player extends GamePlayer
 	
 	public void moveRight()
 	{
+		if(mygame.getInMenu())
+		{mygame.buildMenu();}
         if(getX() + getFrameWidth() < mygame.getMaxX() )
         {	
             movePlayer(getX() + getFrameWidth(), getY());

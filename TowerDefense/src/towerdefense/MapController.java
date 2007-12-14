@@ -13,6 +13,7 @@ public class MapController implements IAlarmListener
 	
 	public MapController(TowerDefense game, int level)
 	{
+		
 		active = true;
 		mygame = game;
 		spawningMobs = 5;

@@ -1,6 +1,7 @@
 package towerdefense;
 
 import phonegame.*;
+import java.lang.Math;
 
 public class Mob extends MoveableGameItem // implements IAlarmListener
 {

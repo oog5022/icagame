@@ -8,6 +8,8 @@ public class RocketTower extends BaseTower
 	{
 		super(game);
 		setImage("/images/RocketTower.png", 20, 20);
+		powerlevel = 1;fireratelevel = 1;distancelevel = 1; //All towers are default lvl 1
+		towerType = "Rocket Tower";
 	}
 	
 	protected void fire()
@@ -18,4 +20,6 @@ public class RocketTower extends BaseTower
 		
 		mygame.addGameItem(projectile);
 	}
+	
+	
 }

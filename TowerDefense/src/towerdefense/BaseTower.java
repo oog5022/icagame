@@ -10,11 +10,13 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	protected boolean isActive;
 	protected Mob target;
 	protected BaseProjectile projectile;
+	protected Player player;
 	
 	// Upgrades
 	protected int distancelevel;
 	protected int fireratelevel;
 	protected int powerlevel;
+	protected String towerType;
 	
 	protected int firerate;
 	protected double maxdist;
@@ -69,6 +71,24 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		this.setFrame( index  );
 	}
 	
+	public int getDistancelevel()
+	{
+		return distancelevel;
+	}
+	public int getFireratelevel()
+	{
+		return fireratelevel;
+	}
+	public int getPowerlevel()
+	{
+		return powerlevel;
+	}
+
+	
+	public String getTowertyp()
+	{
+		return towerType;
+	}
 	protected void fire()
 	{
 		/*

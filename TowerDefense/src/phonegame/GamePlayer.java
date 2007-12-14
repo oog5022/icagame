@@ -21,7 +21,6 @@ public abstract class GamePlayer extends MoveableGameItem
      */
     private boolean hasMoved;
 
-
     /**
      * Ask if player has moved.
      * Intended for use by GameEngine, to see if collision detection is needed.

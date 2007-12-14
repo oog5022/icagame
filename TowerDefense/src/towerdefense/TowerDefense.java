@@ -20,6 +20,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private int time;
 	private int lifes;
 	private int cash;
+	private boolean inMenu;
 	
 	public TowerDefense()
 	{
@@ -76,7 +77,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		else if( label.equals(removeTower) )
 		{
 			GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
-			
 			if( tower instanceof BaseTower ) //check whether its a tower or not.
 			{
 				deleteGameItem(tower);
@@ -93,11 +93,61 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		return level;
 	}
 	
+	public boolean getInMenu()
+	{
+		return inMenu;
+	}
+	
+	public void setMenu()
+	{
+		if((findItemAt(player.getX(), player.getY(), 1, 1)) instanceof BaseTower)
+	  {
+		if(inMenu == false)
+		{
+			nieuwMenu();
+			inMenu = true;
+		}
+		else
+		{
+			GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
+			db.setItemValue("TowerTyp", ((BaseTower)tower).getTowertyp() + " " );
+			db.setItemValue("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " ");
+			db.setItemValue("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " ");
+			db.setItemValue("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " ");
+		}
+	  }
+		else return;
+	}
+		
 	public void setPoints(int p)
 	{
 		// sd.setItemValue("Score", "" + p);
 	}
 	
+	public void nieuwMenu()
+	{
+		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
+		db.deleteItem("LVL");
+		db.deleteItem("HP");
+		db.deleteItem("Cash");
+		db.deleteItem("Time");
+		db.addItem("TowerTyp", ((BaseTower)tower).getTowertyp() + " " );
+		db.addItem("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " ");
+		db.addItem("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " ");
+		db.addItem("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " ");
+	}
+	
+	public void buildMenu()
+	{ 
+		db.deleteItem("TowerTyp");
+		db.deleteItem("Power");
+		db.deleteItem("Firerate");
+		db.deleteItem("Distance");
+		db.addItem("LVL", Integer.toString(level) + " ");
+		db.addItem("HP", Integer.toString(lifes) + " ");
+		db.addItem("Cash", "$ " + cash + " ");
+		db.addItem("Time", "00:00");
+	}
 	public void decLife()
 	{
 		lifes--;
@@ -107,6 +157,12 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public void resetTime()
 	{
 		time = 30;
+	}
+	
+	public void setCash(int changeCash)
+	{
+		cash += changeCash;
+		db.addItem("Cash", "$ " + cash + " ");
 	}
 	
 	public void incLevel()
@@ -173,6 +229,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			db.setForegroundColor(0, 0, 0);
 			db.setFont(true, false, false);
 			db.addItem("You've Lost The Game", "Yet, made it till level " + level);
+			
 			stopGame();
 		}
 		
