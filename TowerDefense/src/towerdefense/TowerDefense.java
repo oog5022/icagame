@@ -10,43 +10,35 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private GameDashboard db;
 	private MapController mc;
 	
+	private int highscore;
+	
 	private static final String rocketTowerMenuItem = "Build: Rocket Tower";
 	private static final String spacerMenuItem = "---";
-	private static final String sellTower = "Sell Tower";
+	private static final String sellTowerMenuItem = "Sell Tower";
+	private static final String restartGameMenuItem = "Restart Game";
 	private static final String exitMenuItem = "Exit";
-	private static final String[] menu = {rocketTowerMenuItem, spacerMenuItem, sellTower, exitMenuItem};
+	private static final String[] menu = {rocketTowerMenuItem, spacerMenuItem, sellTowerMenuItem, restartGameMenuItem, exitMenuItem};
 	
 	private int level;
 	private int time;
 	private int lifes;
 	private int cash;
 	private boolean inMenu;
+	private boolean reset;
 	
 	public TowerDefense()
 	{
 		super();
+		
+		highscore = 0;
 
 		setBounds(0, 0, 240, 260);
 		setBackgroundColor(0, 0, 0);
 		
 		makeMenu(menu, this);
 		
-	    player = new Player(this);
-	    this.addPlayer(player);
-		
-		level = 1;
-		lifes = 20;
-		cash = 100;
-		time = 10;
-
-		buildMenu();
 		buildEnvironment();
-		
-		// mc = new MapController(this, level);
-		
-		addStepListener(this);
-		setTimer(10, 0, this);
-		startGame();
+		resetGame();
 	}
 	
 	public void menuAction(String label)
@@ -71,7 +63,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				}
 			}
 		}
-		else if( label.equals(sellTower) )
+		else if( label.equals(sellTowerMenuItem) )
 		{
 			GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
 			
@@ -81,35 +73,43 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				deleteGameItem(tower);
 			}
 		}
+		else if ( label.equals(restartGameMenuItem) )
+		{
+			reset = true;
+		}
 		else if ( label.equals(exitMenuItem) )
 	    {
 	        exitGame();
 	    } 
 	}
 	
+	public void resetGame()
+	{
+		stopGame();
+		
+		deleteAllGameItems();
+		removeStepListener(this);
+		resetGameTime();
+		
+	    player = new Player(this);
+	    this.addPlayer(player);
+		
+		level = 0;
+		lifes = 5;
+		cash = 100;
+		time = 10;
+		reset = false;
+		
+		buildMenu();
+		startGame();
+		
+		addStepListener(this);
+		setTimer(10, 0, this);
+	}
+	
 	public boolean getInMenu()
 	{
 		return inMenu;
-	}
-	
-		public void setMenu()
-	{
-		if((findItemAt(player.getX(), player.getY(), 1, 1)) instanceof BaseTower)
-		{
-			if(inMenu == false)
-			{
-				nieuwMenu();
-				inMenu = true;
-			}
-			else
-			{
-				GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
-				db.setItemValue("TowerTyp", ((BaseTower)tower).getTowertyp() + " " );
-				db.setItemValue("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " ");
-				db.setItemValue("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " ");
-				db.setItemValue("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " ");
-			}
-		}
 	}
 	
 	public int getLevel()
@@ -125,7 +125,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public void addMoney(int amount)
 	{
 		cash += amount;
-		db.setItemValue("Cash", "$ " + cash + " ");
+		db.setItemText("Cash", Integer.toString(cash) );
 	}
 	
 	public int getMoney()
@@ -143,23 +143,15 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		db.setLineColor(255, 0, 0, false);
 		db.setSize(240,30);
 		db.setPosition(0, 260);
-		db.addItem("TowerTyp", ((BaseTower)tower).getTowertyp() + " " );
-		db.addItem("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " ");
-		db.addItem("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " ");
-		db.addItem("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " ");
+		db.addTextItem("Tower Type", ((BaseTower)tower).getTowertyp(), 1, 1);
+		db.addTextItem("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()), 100, 1);
+		db.addTextItem("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()), 100, 9);
+		db.addTextItem("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()), 100, 18);
 		addGameDashboard(db);
+		
+		inMenu = true;
 	}
 	
-	public void updateMenu(int flag)
-	{
-		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
-		switch(flag)
-		{
-		case 0: db.setItemValue("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " "); break;
-		case 1: db.setItemValue("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " "); break;
-		case 2: db.setItemValue("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " "); break;
-		}		
-	}
 	public void buildMenu()
 	{
 		inMenu = false;
@@ -170,17 +162,36 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		db.setLineColor(255, 0, 0, false);
 		db.setSize(240,30);
 		db.setPosition(0, 260);
-		db.addItem("LVL", Integer.toString(level) + " ");
-		db.addItem("HP", Integer.toString(lifes) + " ");
-		db.addItem("Cash", "$ " + cash + " ");
-		db.addItem("Time", "00:00");	
-		addGameDashboard(db);	
+
+		db.addImageItem("HPLBL", "/images/health.png", 2, 3);
+		db.addImageItem("CashLBL", "/images/dollar.png", 1, 11);
+		db.addTextItem("HP", Integer.toString(lifes), 11, 1);
+		db.addTextItem("Cash", Integer.toString(cash), 11, 9);
+		db.addTextItem("Time", "Time: " + Integer.toString(time), 75, 1);
+		db.addTextItem("LVL", "  Lvl: " + Integer.toString(level), 75, 11 );
+
+		addGameDashboard(db);
+	}
+	
+	public void updateMenu(int flag)
+	{
+		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
+		switch(flag)
+		{
+			case 0: db.setItemText("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()) ); break;
+			case 1: db.setItemText("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()) ); break;
+			case 2: db.setItemText("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()) ); break;
+			default:
+				db.setItemText("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()) );
+				db.setItemText("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()) );
+				db.setItemText("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()) );
+		}		
 	}
 	
 	public void decLife()
 	{
 		lifes--;
-		db.setItemValue("HP", Integer.toString(lifes) + " ");
+		db.setItemText("HP", Integer.toString(lifes));
 	}
 	
 	public void resetTime()
@@ -188,10 +199,15 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		time = 20;
 	}
 	
+	public boolean getResetAsk()
+	{
+		return reset;
+	}
+	
 	public void incLevel()
 	{
 		level++;
-		db.setItemValue("LVL", Integer.toString(level) + " ");
+		db.setItemText("LVL", "  Lvl: " + Integer.toString(level));
 	}
 	
 	private void buildEnvironment()
@@ -232,7 +248,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		{
 			time--;
 			
-			db.setItemValue("Time", Integer.toString(time) );
+			db.setItemText("Time", "Time: " + Integer.toString(time) );
 			
 			setTimer(10, 0, this);
 		}
@@ -243,18 +259,23 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		// Check Lifes (game ends at, lifes == 0)
 		if(lifes == 0)
 		{
-			db.deleteItem("LVL");
-			db.deleteItem("HP");
-			db.deleteItem("Cash");
-			db.deleteItem("Time");
+			if( highscore < level)
+				highscore = level;
 			
+			db = new GameDashboard();
 			db.setBackgroundColor(255, 0, 0);
 			db.setForegroundColor(0, 0, 0);
+			db.setLineColor(255, 0, 0, false);
+			db.setSize(240,30);
+			db.setPosition(0, 260);
 			db.setFont(true, false, false);
-			db.addItem("You've Lost The Game", "Yet, made it till level " + level);
+			db.addTextItem("LOSE", "You've lost the game: Yet, made it till level " + level, 20, 6);
+			db.addTextItem("HIGHSCORE", "New Highscore!", 82, 16);
+			addGameDashboard(db);
+
+			// deleteAllGameItems();
 			stopGame();
 		}
-		
 		else if(time == 0) // Respawn
 		{
 			resetTime();

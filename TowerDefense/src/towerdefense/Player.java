@@ -57,7 +57,10 @@ public class Player extends GamePlayer
 	
 	public void pressedButtonD()
 	{
-		// 9
+		if( mygame.getResetAsk() )
+		{
+			mygame.resetGame();
+		}
 	}
 	
 	public void moveDown()
@@ -106,7 +109,10 @@ public class Player extends GamePlayer
 	
 	public void fire()
 	{
-		mygame.setMenu();
+		if( ! mygame.getInMenu() )
+			mygame.nieuwMenu();
+		else
+			mygame.buildMenu();
 	}
 	
 	public void animate()

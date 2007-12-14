@@ -33,6 +33,8 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		distancelevel = fireratelevel = powerlevel = firerate = damage = 0;
 		
 		incFireRateLevel();
+		incPowerLevel();
+		incDistanceLevel();
 		
 		maxdist = 50f;
 		
