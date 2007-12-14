@@ -9,8 +9,6 @@ public class RocketTower extends BaseTower
 		super(game);
 		
 		cashvalue = 50;
-		
-		powerlevel = fireratelevel = distancelevel = 1; //All towers are default lvl 1
 		towerType = "Rocket Tower";
 		
 		setImage("/images/RocketTower.png", 20, 20);
@@ -19,9 +17,43 @@ public class RocketTower extends BaseTower
 	protected void fire()
 	{
 		BaseProjectile projectile = new RocketProjectile(mygame, target, this);
-		projectile.setSpeed(10);
+		projectile.setSpeed( 10 );
 		projectile.setPosition(this.getX() + (this.getFrameWidth() / 2) - (projectile.getFrameWidth() / 2), this.getY() + (this.getFrameHeight() / 2) - (projectile.getFrameHeight() / 2));
+		projectile.setDamage( damage );
 		
 		mygame.addGameItem(projectile);
+	}
+	
+	public void incFireRateLevel()
+	{
+		int cashreq = 0;
+		if( cashreq < mygame.getMoney() )
+		{
+			mygame.addMoney( - cashreq );
+			fireratelevel++;
+			firerate = (int) Math.floor( 35 - .15 * fireratelevel );
+		}
+	}
+	
+	public void incDistanceLevel()
+	{
+		int cashreq = 0;
+		if( cashreq < mygame.getMoney() )
+		{
+			mygame.addMoney( - cashreq );
+			distancelevel++;
+			maxdist = (double) ( 50 + .5 * distancelevel );
+		}
+	}
+	
+	public void incPowerLevel()
+	{
+		int cashreq = 0;
+		if( cashreq < mygame.getMoney() )
+		{
+			mygame.addMoney( - cashreq );
+			powerlevel++;
+			damage = (int) Math.floor( 25 + 10 * powerlevel );
+		}
 	}
 }

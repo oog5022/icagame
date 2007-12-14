@@ -91,9 +91,6 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		/*
 		if(object instanceof BaseProjectile)
 		{
-
-			
-
 		}
 		else
 		*/

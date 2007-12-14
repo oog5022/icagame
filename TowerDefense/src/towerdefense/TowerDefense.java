@@ -128,6 +128,11 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		db.setItemValue("Cash", "$ " + cash + " ");
 	}
 	
+	public int getMoney()
+	{
+		return cash;
+	}
+	
 	public void nieuwMenu()
 	{
 		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);

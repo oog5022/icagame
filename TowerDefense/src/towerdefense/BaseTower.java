@@ -19,6 +19,8 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	
 	protected int firerate;
 	protected double maxdist;
+	protected int damage;
+
 	protected int cashvalue;
 	
 	public BaseTower(TowerDefense game)
@@ -28,7 +30,10 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		mygame = game;
 		isActive = true;
 		
-		firerate = 25;
+		distancelevel = fireratelevel = powerlevel = firerate = damage = 0;
+		
+		incFireRateLevel();
+		
 		maxdist = 50f;
 		
 		cashvalue = 0;
@@ -82,6 +87,21 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		
 		mygame.addGameItem(projectile);
 		*/
+	}
+	
+	protected void incFireRateLevel()
+	{
+		fireratelevel++;
+	}
+	
+	protected void incDistanceLevel()
+	{
+		distancelevel++;
+	}
+	
+	protected void incPowerLevel()
+	{
+		powerlevel++;
 	}
 	
 	public int getDistancelevel()
