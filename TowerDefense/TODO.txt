@@ -5,11 +5,6 @@ Making Towers in Photoshop --
 	LaserTower
 	GattlingTower
 	Frost Tower
-	
-Making enemy's in Photoshop -- 
-	Mob1.png  -normal mob- *done*
-		Mob2.png  -fast mob-
-	
 
 
 Scriping:
@@ -19,10 +14,5 @@ RocketTower -- *done*
 LaserTower (vectorlines?)
 GattlingTower (fast rockets? :S)
 FrostTower (slowing steps of mobs)
-
-Mobs:
-normal mob -- *done*
-fast mob (high speed)
-Strong mob (slow speed high hp)
 
 Anything else?

@@ -20,6 +20,5 @@ public class RocketProjectile extends BaseProjectile
 		}
 		
 		damage = (int) Math.floor( tempDmg );
-		System.out.println( damage + " damage dealt by rocker! (Testing + expanding)");
 	}
 }

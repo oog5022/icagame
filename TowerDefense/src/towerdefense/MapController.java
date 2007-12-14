@@ -40,7 +40,7 @@ public class MapController implements IAlarmListener
 		
 		if(spawningMobs == 0)
 			return;
-		int r = Tools.random(5);
+		int r = Tools.random(6);
 		int randMob = 0;
 			switch(r)
 			{

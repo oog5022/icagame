@@ -7,15 +7,17 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 	private TowerDefense mygame;
 	private boolean active;
 	private int health;
-	
+	private int type;
 	public Mob(TowerDefense game, int mobtype)
 	{
+		type = mobtype;
 		mygame = game;
 		active = true;
 		switch(mobtype)
 		{
 		case 0:										// normal mob
 			setImage("/images/Mob1.png", 20, 20);	// image Mob1
+			
 			setHP(10, 1.5, mygame.getLevel());		// startHP = 10
 			setSpeed(2);							// speed = 2
 			startMoving();
@@ -29,7 +31,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		case 2:										// heavy mob (tank)
 			setImage("/images/Mob3.png", 20, 20);	// image Mob3
 			setHP(20, 1.5, mygame.getLevel());		// startHP = 20 (2*normal)
-			setSpeed(2);							// speed = 2
+			setSpeed(1);							// speed = 1.4
 			startMoving();
 		break;
 		
@@ -61,9 +63,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 	 */
 	
 	public void animate()
-	{
-		
-	}
+	{}
 	
 	public int checkDir()
 	{
@@ -136,7 +136,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 				((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
 				active = false;
 			
-				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) );
+				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) ); // 3 cases
 				mygame.deleteGameItem(this);
 			}
 			

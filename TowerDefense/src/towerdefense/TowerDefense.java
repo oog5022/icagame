@@ -136,20 +136,21 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public void nieuwMenu()
 	{
 		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
-		
-		db = new GameDashboard();
-		db.setForegroundColor(255,255,255);
-		db.setBackgroundColor(0,0,0);
-		db.setLineColor(255, 0, 0, false);
-		db.setSize(240,30);
-		db.setPosition(0, 260);
-		db.addTextItem("Tower Type", ((BaseTower)tower).getTowertyp(), 1, 1);
-		db.addTextItem("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()), 100, 1);
-		db.addTextItem("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()), 100, 9);
-		db.addTextItem("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()), 100, 18);
-		addGameDashboard(db);
-		
-		inMenu = true;
+		if(tower instanceof BaseTower)
+		{
+			db = new GameDashboard();
+			db.setForegroundColor(255,255,255);
+			db.setBackgroundColor(0,0,0);
+			db.setLineColor(255, 0, 0, false);
+			db.setSize(240,30);
+			db.setPosition(0, 260);
+			db.addTextItem("Tower Type", ((BaseTower)tower).getTowertyp(), 1, 1);
+			db.addTextItem("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()), 100, 1);
+			db.addTextItem("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()), 100, 9);
+			db.addTextItem("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()), 100, 18);
+			addGameDashboard(db);
+			inMenu = true;
+		}
 	}
 	
 	public void buildMenu()
