@@ -150,6 +150,16 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		addGameDashboard(db);
 	}
 	
+	public void updateMenu(int flag)
+	{
+		GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
+		switch(flag)
+		{
+		case 0: db.setItemValue("Power", Integer.toString(((BaseTower)tower).getPowerlevel()) + " "); break;
+		case 1: db.setItemValue("Firerate", Integer.toString(((BaseTower)tower).getFireratelevel()) + " "); break;
+		case 2: db.setItemValue("Distance", Integer.toString(((BaseTower)tower).getDistancelevel()) + " "); break;
+		}		
+	}
 	public void buildMenu()
 	{
 		inMenu = false;

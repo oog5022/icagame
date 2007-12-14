@@ -25,6 +25,7 @@ public class Player extends GamePlayer
 			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
 			{
 				((BaseTower)tower).incPowerLevel();
+				mygame.updateMenu(0);
 			}			
 		}
 		
@@ -37,6 +38,7 @@ public class Player extends GamePlayer
 			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
 			{
 				((BaseTower)tower).incFireRateLevel();
+				mygame.updateMenu(1);
 			}			
 		}
 	}
@@ -48,6 +50,7 @@ public class Player extends GamePlayer
 			GameItem tower = mygame.findItemAt(getX(), getY(), 1, 1);
 			{
 				((BaseTower)tower).incDistanceLevel();
+				mygame.updateMenu(2);
 			}			
 		}
 	}
