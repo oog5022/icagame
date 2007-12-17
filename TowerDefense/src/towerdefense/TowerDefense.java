@@ -13,11 +13,12 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private int highscore;
 	
 	private static final String rocketTowerMenuItem = "Build: Rocket Tower";
+	private static final String laserTowerMenuItem = "Build: Laser Tower";
 	private static final String spacerMenuItem = "---";
 	private static final String sellTowerMenuItem = "Sell Tower";
 	private static final String restartGameMenuItem = "Restart Game";
 	private static final String exitMenuItem = "Exit";
-	private static final String[] menu = {rocketTowerMenuItem, spacerMenuItem, sellTowerMenuItem, restartGameMenuItem, exitMenuItem};
+	private static final String[] menu = {rocketTowerMenuItem, laserTowerMenuItem, spacerMenuItem, sellTowerMenuItem, restartGameMenuItem, exitMenuItem};
 	
 	private int level;
 	private int time;
@@ -50,6 +51,26 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 				if( (findItemAt(player.getX(), player.getY(), 1, 1) instanceof BaseTower) == false ) // Not building on another tower?
 				{
 					BaseTower rt = new RocketTower(this);
+					
+					if( cash < rt.getCashValue() )
+					{
+						return;
+					}
+					
+					rt.setPosition(player.getX(), player.getY());
+					addGameItem(rt);
+					addMoney( - rt.getCashValue() );
+					
+				}
+			}
+		}
+		else if( label.equals(laserTowerMenuItem) )
+		{
+			if( findTilesAt(player.getX(), player.getY(), 1, 1) == 1 ) // Building on Grass tile?
+			{
+				if( (findItemAt(player.getX(), player.getY(), 1, 1) instanceof BaseTower) == false ) // Not building on another tower?
+				{
+					BaseTower rt = new LaserTower(this);
 					
 					if( cash < rt.getCashValue() )
 					{
@@ -115,11 +136,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public int getLevel()
 	{
 		return level;
-	}
-	
-	public void setPoints(int p)
-	{
-		// sd.setItemValue("Score", "" + p);
 	}
 	
 	public void addMoney(int amount)

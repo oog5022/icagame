@@ -43,7 +43,7 @@ public abstract class GameItem
      * An image may consist of a strip of frames. You can select a frame for display,
      * or play the frames as an animation.
      */
-    private Image image = null;
+    protected Image image = null;
 
     /**
      * The number of the frame that is currently on display
@@ -365,7 +365,7 @@ public abstract class GameItem
      * @param offsetY
      *                the vertical offset used by the viewport
      */
-    final void paint(Graphics g, int offsetX, int offsetY)
+    protected void paint(Graphics g, int offsetX, int offsetY)
     {
         if (visible)
         {

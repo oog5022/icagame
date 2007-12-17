@@ -83,12 +83,6 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	
 	protected void fire()
 	{
-		/*
-		BaseProjectile projectile = new BaseProjectile(mygame, target, this);
-		projectile.setPosition(this.getX(), this.getY());
-		
-		mygame.addGameItem(projectile);
-		*/
 	}
 	
 	protected void incFireRateLevel()
@@ -142,6 +136,11 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	public int getCashValue()
 	{
 		return cashvalue;
+	}
+	
+	public double getDistance()
+	{
+		return maxdist;
 	}
 	
 	public void animate()

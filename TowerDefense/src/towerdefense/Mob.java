@@ -141,6 +141,21 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 			
 			mygame.deleteGameItem(object);
 		}
+		else if(object instanceof LaserProjectile)
+		{
+			addDamage( ((BaseProjectile)object).getDamage() );
+			System.out.println( ((BaseProjectile)object).getDamage() );
+
+			if(health == 0)
+			{
+				((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
+				active = false;
+			
+				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) );
+				mygame.deleteGameItem(object);
+				mygame.deleteGameItem(this);
+			}
+		}
 	}
 	
 	private void addDamage(int damage)
