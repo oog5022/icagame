@@ -19,7 +19,6 @@ public class FrostTower extends BaseTower
 		BaseProjectile projectile = new FrostProjectile(mygame, target, this);
 		projectile.setSpeed( 10 );
 		projectile.setPosition(this.getX() + (this.getFrameWidth() / 2) - (projectile.getFrameWidth() / 2), this.getY() + (this.getFrameHeight() / 2) - (projectile.getFrameHeight() / 2));
-		projectile.setDamage( damage );
 		
 		mygame.addGameItem(projectile);
 	}
