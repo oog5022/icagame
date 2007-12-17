@@ -4,7 +4,7 @@ Making Towers in Photoshop --
 	RocketTower *done*
 	LaserTower *done*
 	GattlingTower
-	Frost Tower
+	Frost Tower *done*
 
 
 Scriping:
@@ -13,6 +13,6 @@ Towers:
 RocketTower -- *done*
 LaserTower (vectorlines?) -- Work In Progress
 GattlingTower (fast rockets? :S)
-FrostTower (slowing steps of mobs)
+FrostTower (slowing steps of mobs) -- Work In Progress
 
 Anything else?
