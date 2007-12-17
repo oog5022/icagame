@@ -293,6 +293,11 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		}
 	}
 	
+	public int getTime()
+	{
+		return time;
+	}
+	
 	public void stepAction(int stepnr)
 	{
 		// Check Lifes (game ends at, lifes == 0)

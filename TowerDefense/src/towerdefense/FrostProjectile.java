@@ -17,18 +17,5 @@ public class FrostProjectile extends BaseProjectile
 		{
 			tempSpeed /= slowMultiplier; //speed -20% every level
 		}
-		target.setSpeed(target.getSpeed() * tempSpeed);
-		
-	}
-	public void setDamage(int start, double mod, BaseTower p)
-	{
-		double tempDmg = start;
-		
-		for(int i = 0; i <= p.powerlevel; i++) 
-		{ 
-			tempDmg *= mod;
-		}
-		
-		damage = (int) Math.floor( tempDmg );
 	}
 }

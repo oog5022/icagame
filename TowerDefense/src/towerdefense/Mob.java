@@ -2,12 +2,13 @@ package towerdefense;
 
 import phonegame.*;
 
-public class Mob extends MoveableGameItem // implements IAlarmListener
+public class Mob extends MoveableGameItem
 {
 	private TowerDefense mygame;
 	private boolean active;
 	private int health;
 	private int type;
+	double mobReward;
 	public Mob(TowerDefense game, int mobtype)
 	{
 		type = mobtype;
@@ -128,9 +129,13 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 			{
 				((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
 				active = false;
-			
-				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) ); // 3 cases
+				addMoney();
+				Explosion exp = new Explosion(mygame);
+				exp.setPosition(getX(), getY());
 				mygame.deleteGameItem(this);
+				mygame.addGameItem(exp);
+				mygame.deleteGameItem(exp);
+				
 			}
 			
 			mygame.deleteGameItem(object);
@@ -143,12 +148,44 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 			{
 				((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
 				active = false;
-			
-				mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * 3) );
+				addMoney();
+				Explosion exp = new Explosion(mygame);
+				exp.setPosition(getX(), getY());
 				mygame.deleteGameItem(object);
 				mygame.deleteGameItem(this);
+				mygame.addGameItem(exp);
+				mygame.deleteGameItem(exp);
 			}
 		}
+		else if(object instanceof FrostProjectile)
+		{	
+			((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
+			active = false;
+			mygame.deleteGameItem(object);
+			switch(type)
+			{
+			case 0: setImage("/images/FrostMob1.png", 20, 20); checkDir(); break;
+			case 1: setImage("/images/FrostMob2.png", 20, 20); checkDir(); break;
+			case 2: setImage("/images/FrostMob3.png", 20, 20); checkDir(); break;
+			}
+		}
+	}
+	
+	private void addMoney()
+	{	
+		switch (type)
+		{
+		case 0:				//Normal mob 2*
+			mobReward = 2;
+		break;
+		case 1:				//Race mob 2.5*
+			mobReward = 2.5;
+		break;
+		case 2:				//Tank mob 3*
+			mobReward = 3;
+		break;				
+		}
+		mygame.addMoney( (int) Math.floor( 15 + mygame.getLevel() * mobReward));
 	}
 	
 	private void addDamage(int damage, BaseTower bt)
