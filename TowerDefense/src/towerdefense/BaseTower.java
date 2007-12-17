@@ -22,6 +22,7 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 	protected int damage;
 
 	protected int cashvalue;
+	protected int damagedone;
 	
 	public BaseTower(TowerDefense game)
 	{
@@ -30,7 +31,7 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
 		mygame = game;
 		isActive = true;
 		
-		distancelevel = fireratelevel = powerlevel = firerate = damage = 0;
+		distancelevel = fireratelevel = powerlevel = firerate = damage = damagedone = 0;
 		
 		incFireRateLevel();
 		incPowerLevel();
@@ -73,6 +74,21 @@ public abstract class BaseTower extends GameItem implements IAlarmListener
         }
 
         return (360+Tools.round(Math.toDegrees(radians)))%360;
+	}
+	
+	public void setDistance(int num)
+	{
+		maxdist = num;
+	}
+	
+	public void addDamageDone(int damage)
+	{
+		damagedone += damage;
+	}
+	
+	public int getDamageDone()
+	{
+		return damagedone;
 	}
 	
 	private void drawFacing()

@@ -164,6 +164,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			db.addTextItem("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()), 100, 1);
 			db.addTextItem("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()), 100, 9);
 			db.addTextItem("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()), 100, 18);
+			db.addTextItem("Damage", "Damage: " + Integer.toString(((BaseTower)tower).getDamageDone()), 150, 1);
 			addGameDashboard(db);
 			inMenu = true;
 		}

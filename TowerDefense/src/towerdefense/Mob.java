@@ -118,17 +118,11 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 	
 	public void collisionOccured(GameItem object)
 	{
-		/*
-		if(object instanceof BaseProjectile)
-		{
-		}
-		else
-		*/
 		if(object instanceof RocketProjectile)
 		{
 			System.out.println( health + " : " + ((BaseProjectile)object).getDamage() );
 			
-			addDamage( ((BaseProjectile)object).getDamage() );
+			addDamage( ((BaseProjectile)object).getDamage(), (BaseTower)((BaseProjectile)object).getParent() );
 			
 			if(health == 0)
 			{
@@ -143,8 +137,7 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		}
 		else if(object instanceof LaserProjectile)
 		{
-			addDamage( ((BaseProjectile)object).getDamage() );
-			System.out.println( ((BaseProjectile)object).getDamage() );
+			addDamage( ((BaseProjectile)object).getDamage(), (BaseTower)((BaseProjectile)object).getParent() );
 
 			if(health == 0)
 			{
@@ -158,8 +151,10 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		}
 	}
 	
-	private void addDamage(int damage)
+	private void addDamage(int damage, BaseTower bt)
 	{
+		bt.addDamageDone(damage);
+		
 		health -= damage;
 		
 		if(health < 0)

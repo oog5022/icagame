@@ -8,8 +8,8 @@ public class LaserProjectile extends BaseProjectile
 	{
 		super(game, pointer, p);
 		
-		setDamage(20, 1.5, parent);
-		setSpeed(1);
+		setDamage(1, 1.5, parent);
+		setSpeed(1000);
 	}
 	
 	public void setDamage(int start, double mod, BaseTower p)
@@ -32,7 +32,7 @@ public class LaserProjectile extends BaseProjectile
 			int dy = (parent.getY() + parent.getFrameHeight() / 2) - (target.getY() + target.getFrameHeight() / 2);
 			double distance = Math.sqrt(dx * dx + dy * dy);
 			
-	    	if( parent.getDistance() > distance )
+	    	if( parent.getDistance() < distance )
 	    	{
 	    		mygame.deleteGameItem(this);
 	    		return;
@@ -47,7 +47,7 @@ public class LaserProjectile extends BaseProjectile
 			return;
 		}
 
-		// moveTowardsAPoint(target.getX(), target.getY());
+		//moveTowardsAPoint(target.getX(), target.getY());
 	}
 	
 	public void paint(Graphics g, int offsetX, int offsetY)

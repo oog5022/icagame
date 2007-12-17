@@ -55,7 +55,7 @@ public class LaserTower extends BaseTower
 		{
 			mygame.addMoney( - cashreq );
 			powerlevel++;
-			damage = (int) Math.floor( 25 + 10 * powerlevel );
+			damage = (int) Math.floor( 1 + 1 * powerlevel );
 		}
 	}
 }
