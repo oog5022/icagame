@@ -14,7 +14,7 @@ public class RocketTower extends BaseTower
 		setImage("/images/RocketTower.png", 20, 20);
 	}
 	
-	protected void fire()
+	public void fire()
 	{
 		BaseProjectile projectile = new RocketProjectile(mygame, target, this);
 		projectile.setSpeed( 10 );
@@ -32,6 +32,9 @@ public class RocketTower extends BaseTower
 			mygame.addMoney( - cashreq );
 			fireratelevel++;
 			firerate = (int) Math.floor( 35 - .15 * fireratelevel );
+			
+			if(firerate < 15)
+				firerate = 15;
 		}
 	}
 	
