@@ -17,7 +17,6 @@ public class Mob extends MoveableGameItem // implements IAlarmListener
 		{
 		case 0:										// normal mob
 			setImage("/images/Mob1.png", 20, 20);	// image Mob1
-			
 			setHP(10, 1.5, mygame.getLevel());		// startHP = 10
 			setSpeed(2);							// speed = 2
 			startMoving();
