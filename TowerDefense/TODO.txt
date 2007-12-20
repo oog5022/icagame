@@ -11,7 +11,7 @@ Scriping:
 
 Towers:
 RocketTower -- *done*
-LaserTower (vectorlines?) -- Work In Progress
+LaserTower -- *done*
 GattlingTower (fast rockets? :S)
 FrostTower (slowing steps of mobs) -- Work In Progress
 

@@ -9,11 +9,13 @@ public class Mob extends MoveableGameItem
 	private int health;
 	private int type;
 	double mobReward;
+	private boolean frosted;
 	public Mob(TowerDefense game, int mobtype)
 	{
 		type = mobtype;
 		mygame = game;
 		active = true;
+		frosted = false;
 		switch(mobtype)
 		{
 		case 0:										// normal mob
@@ -84,24 +86,44 @@ public class Mob extends MoveableGameItem
 		temp = dir;
 
 		if( temp != 180 && mygame.findTilesAt(getX() + getFrameWidth(), getY(), 1, 1) == 2 ){
-			dir = 0;
-			this.setFrame(0);
+			if(frosted = true){
+				dir = 0;
+				this.setFrame(4);
+			}else{
+				dir = 0;
+				this.setFrame(0);
+			}
 		}
 			
 		else if ( temp != 90 && mygame.findTilesAt(getX(), getY() + getFrameHeight(), 1, 1) == 2 )
 		{
-			dir = 270;
-			this.setFrame(1);
+			if(frosted = true){
+				dir = 270;
+				this.setFrame(5);
+			}else{
+				dir = 270;
+				this.setFrame(1);
+			}
 		}
 		else if ( temp != 0 && mygame.findTilesAt(getX() - getFrameWidth(), getY(), 1, 1) == 2 )
 		{
-			dir = 180;
-			this.setFrame(2);
+			if(frosted = true){
+				dir = 180;
+				this.setFrame(6);
+			}else{
+				dir = 180;
+				this.setFrame(2);
+			}
 		}
 		else if ( temp != 270 && mygame.findTilesAt(getX(), getY() - getFrameHeight(), 1, 1) == 2 )
 		{
-			dir = 90;
-			this.setFrame(3);
+			if(frosted = true){
+				dir = 180;
+				this.setFrame(7);
+			}else{
+				dir = 90;
+				this.setFrame(3);
+			}
 		}
 		return dir;
 	}
@@ -159,17 +181,21 @@ public class Mob extends MoveableGameItem
 		}
 		else if(object instanceof FrostProjectile)
 		{	
-			((BaseTower)((BaseProjectile)object).getParent()).lockTarget(null);
-			active = false;
+			double dmglvl = ((BaseTower)((BaseProjectile)object).getParent()).powerlevel;
 			mygame.deleteGameItem(object);
-			switch(type)
+			double mobSpeed = getSpeed();
+			float slowMultiplier = 1.1f;  		//speed -10% every level
+			for(int i =0; i <= dmglvl;i++)
 			{
-			case 0: setImage("/images/FrostMob1.png", 20, 20); checkDir(); break;
-			case 1: setImage("/images/FrostMob2.png", 20, 20); checkDir(); break;
-			case 2: setImage("/images/FrostMob3.png", 20, 20); checkDir(); break;
+				mobSpeed /= slowMultiplier;
 			}
+			if(mobSpeed <= 0.25)
+				{ mobSpeed = 0.25;}
+			setSpeed(mobSpeed);
+			if(frosted == false){frosted = true;checkDir();	}
 		}
 	}
+	
 	
 	private void addMoney()
 	{	
