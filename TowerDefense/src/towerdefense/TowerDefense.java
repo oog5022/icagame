@@ -318,7 +318,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			addGameDashboard(db);
 
 			// deleteAllGameItems();
-			stopGame();
+			pauseApp();
 		}
 		else if(time == 0) // Respawn
 		{
