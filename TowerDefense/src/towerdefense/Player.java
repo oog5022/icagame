@@ -55,14 +55,6 @@ public class Player extends GamePlayer
 		}
 	}
 	
-	public void pressedButtonD()
-	{
-		if( mygame.getResetAsk() )
-		{
-			mygame.resetGame();
-		}
-	}
-	
 	public void moveDown()
 	{
 		if( mygame.getInMenu() )

@@ -26,7 +26,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	private int lifes;
 	private int cash;
 	private boolean inMenu;
-	private boolean reset;
 	
 	public TowerDefense()
 	{
@@ -117,7 +116,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		}
 		else if ( label.equals(restartGameMenuItem) )
 		{
-			reset = true;
+			resetGame();
 		}
 		else if ( label.equals(exitMenuItem) )
 	    {
@@ -140,7 +139,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 		lifes = 20;
 		cash = 1000000;
 		time = 10;
-		reset = false;
 		
 		buildMenu();
 		startGame();
@@ -236,11 +234,6 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public void resetTime()
 	{
 		time = 20;
-	}
-	
-	public boolean getResetAsk()
-	{
-		return reset;
 	}
 	
 	public void incLevel()
