@@ -86,7 +86,7 @@ public class Mob extends MoveableGameItem
 		temp = dir;
 
 		if( temp != 180 && mygame.findTilesAt(getX() + getFrameWidth(), getY(), 1, 1) == 2 ){
-			if(frosted = true){
+			if(frosted == true){
 				dir = 0;
 				this.setFrame(4);
 			}else{
@@ -97,7 +97,7 @@ public class Mob extends MoveableGameItem
 			
 		else if ( temp != 90 && mygame.findTilesAt(getX(), getY() + getFrameHeight(), 1, 1) == 2 )
 		{
-			if(frosted = true){
+			if(frosted == true){
 				dir = 270;
 				this.setFrame(5);
 			}else{
@@ -107,7 +107,7 @@ public class Mob extends MoveableGameItem
 		}
 		else if ( temp != 0 && mygame.findTilesAt(getX() - getFrameWidth(), getY(), 1, 1) == 2 )
 		{
-			if(frosted = true){
+			if(frosted == true){
 				dir = 180;
 				this.setFrame(6);
 			}else{
@@ -117,14 +117,17 @@ public class Mob extends MoveableGameItem
 		}
 		else if ( temp != 270 && mygame.findTilesAt(getX(), getY() - getFrameHeight(), 1, 1) == 2 )
 		{
-			if(frosted = true){
-				dir = 180;
+			if(frosted == true){
+				dir = 90;
 				this.setFrame(7);
 			}else{
 				dir = 90;
 				this.setFrame(3);
 			}
 		}
+		
+		System.out.println( "Dir: " + temp + " -> " + dir + " - Speed: " + getSpeed() + " - Pos: " + getX() + ":" + getY() + " -> " + getPrevX() + ":" + getPrevY() );
+		
 		return dir;
 	}
 	
@@ -191,6 +194,9 @@ public class Mob extends MoveableGameItem
 			}
 			if(mobSpeed <= 0.25)
 				{ mobSpeed = 0.25;}
+			
+			mobSpeed = Math.ceil(mobSpeed);
+			
 			setSpeed(mobSpeed);
 			if(frosted == false){frosted = true;checkDir();	}
 		}

@@ -185,7 +185,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			db.addTextItem("Power", "Power: " + Integer.toString(((BaseTower)tower).getPowerlevel()), 100, 1);
 			db.addTextItem("Firerate", "Firerate: " + Integer.toString(((BaseTower)tower).getFireratelevel()), 100, 9);
 			db.addTextItem("Distance", "Distance: " + Integer.toString(((BaseTower)tower).getDistancelevel()), 100, 18);
-			db.addTextItem("Damage", "Damage: " + Integer.toString(((BaseTower)tower).getDamageDone()), 150, 1);
+			db.addTextItem("Damage", "Damage: " + damageOutput(((BaseTower)tower).getDamageDone()), 165, 1);
 			addGameDashboard(db);
 			inMenu = true;
 		}
@@ -289,6 +289,12 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			
 			db.setItemText("Time", "Time: " + Integer.toString(time) );
 			
+			GameItem tower = findItemAt(player.getX(), player.getY(), 1, 1);
+			if(inMenu)
+			{
+				db.setItemText("Damage", "Damage: " + damageOutput(((BaseTower)tower).getDamageDone()));
+			}
+			
 			setTimer(10, 0, this);
 		}
 	}
@@ -301,7 +307,7 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 	public void stepAction(int stepnr)
 	{
 		// Check Lifes (game ends at, lifes == 0)
-		if(lifes == 0)
+		if(lifes <= 0)
 		{
 			if( highscore < level)
 				highscore = level;
@@ -320,11 +326,35 @@ public class TowerDefense extends GameEngine implements IMenuListener, IAlarmLis
 			// deleteAllGameItems();
 			pauseApp();
 		}
-		else if(time == 0) // Respawn
+
+		if(time == 0) // Respawn
 		{
 			resetTime();
 			incLevel();
 			mc = new MapController(this, level);
 		}
+	}
+	
+	public String damageOutput(int damage)
+	{
+		double dmg = damage;
+		String[] aValues = new String[6];
+		aValues[0] = "";
+		aValues[1] = "K";
+		aValues[2] = "M";
+		aValues[3] = "G";
+		aValues[4] = "T";
+		aValues[5] = "P";
+		
+		int i = 0;
+		while(i < 6 && dmg >= 1000)
+		{
+			dmg /= 1000;
+			i++;
+		}
+		
+		dmg = Math.floor( dmg * 10 ) / 10;
+		
+		return ( dmg + aValues[i] );
 	}
 }

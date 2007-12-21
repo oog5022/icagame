@@ -16,7 +16,7 @@ public class MapController implements IAlarmListener
 	{
 		active = true;
 		mygame = game;
-		spawningMobs = 5;
+		spawningMobs = 15;
 		
 		startx = 0;
 		starty = 20;
