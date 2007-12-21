@@ -1,18 +1,5 @@
 TODO:
-Graphics:
-Making Towers in Photoshop -- 
-	RocketTower *done*
-	LaserTower *done*
-	GattlingTower
-	Frost Tower *done*
-
-
-Scriping:
-
-Towers:
-RocketTower -- *done*
-LaserTower -- *done*
-GattlingTower (fast rockets? :S)
-FrostTower (slowing steps of mobs) -- Work In Progress
-
-Anything else?
+Upgrade pricing!
+Game Balancing.....
+Every page copyrighting.
+Killcount?
