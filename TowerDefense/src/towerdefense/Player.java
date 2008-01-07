@@ -1,3 +1,7 @@
+/**
+ * Scripting Door Rick Meegens & Michiel Dondorp
+ * ICA Arnhem IC1C
+ */
 package towerdefense;
 
 import phonegame.*;
@@ -43,6 +47,7 @@ public class Player extends GamePlayer
 		}
 	}
 	
+	
 	public void pressedButtonC()
 	{
 		if( mygame.getInMenu())
@@ -54,6 +59,9 @@ public class Player extends GamePlayer
 			}			
 		}
 	}
+	
+	public void pressedButtonD()
+	{} 
 	
 	public void moveDown()
 	{

@@ -1,3 +1,7 @@
+/**
+ * Scripting Door Rick Meegens & Michiel Dondorp
+ * ICA Arnhem IC1C
+ */
 package towerdefense;
 
 import phonegame.*;
@@ -16,7 +20,7 @@ public class MapController implements IAlarmListener
 	{
 		active = true;
 		mygame = game;
-		spawningMobs = 15;
+		spawningMobs = 5;
 		
 		startx = 0;
 		starty = 20;

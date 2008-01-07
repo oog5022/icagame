@@ -1,3 +1,7 @@
+/**
+ * Scripting Door Rick Meegens & Michiel Dondorp
+ * ICA Arnhem IC1C
+ */
 package towerdefense;
 
 import phonegame.*;
