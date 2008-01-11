@@ -4,8 +4,6 @@
  */
 package towerdefense;
 
-import phonegame.GameItem;
-
 public class LaserTower extends BaseTower
 {
 	public LaserTower(TowerDefense game)
@@ -29,7 +27,7 @@ public class LaserTower extends BaseTower
 	
 	public void incFireRateLevel()
 	{
-		int cashreq = 0;
+		int cashreq = fireratelevel*200;
 		if( cashreq <= mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );
@@ -43,7 +41,7 @@ public class LaserTower extends BaseTower
 	
 	public void incDistanceLevel()
 	{
-		int cashreq = 0;
+		int cashreq = distancelevel*200;
 		if( cashreq <= mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );
@@ -54,7 +52,7 @@ public class LaserTower extends BaseTower
 	
 	public void incPowerLevel()
 	{
-		int cashreq = 0;
+		int cashreq = powerlevel*200;
 		if( cashreq <= mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );

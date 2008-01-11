@@ -4,8 +4,6 @@
  */
 package towerdefense;
 
-import phonegame.*;
-
 public class FrostTower extends BaseTower
 {
 	public FrostTower(TowerDefense game)
@@ -29,7 +27,7 @@ public class FrostTower extends BaseTower
 	
 	public void incFireRateLevel()
 	{
-		int cashreq = 0;
+		int cashreq = fireratelevel*250;
 		if( cashreq < mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );
@@ -40,7 +38,7 @@ public class FrostTower extends BaseTower
 	
 	public void incDistanceLevel()
 	{
-		int cashreq = 0;
+		int cashreq = distancelevel*250;
 		if( cashreq < mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );
@@ -51,7 +49,7 @@ public class FrostTower extends BaseTower
 	
 	public void incPowerLevel()
 	{
-		int cashreq = 0;
+		int cashreq = powerlevel*250;
 		if( cashreq < mygame.getMoney() )
 		{
 			mygame.addMoney( - cashreq );

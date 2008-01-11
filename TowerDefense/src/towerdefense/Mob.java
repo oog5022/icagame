@@ -37,7 +37,7 @@ public class Mob extends MoveableGameItem
 		case 2:										// heavy mob (tank)
 			setImage("/images/Mob3.png", 20, 20);	// image Mob3
 			setHP(20, 1.5, mygame.getLevel());		// startHP = 20 (2*normal)
-			setSpeed(1);							// speed = 1.4
+			setSpeed(1);							// speed = 1
 			startMoving();
 		break;
 		
@@ -130,8 +130,6 @@ public class Mob extends MoveableGameItem
 			}
 		}
 		
-		System.out.println( "Dir: " + temp + " -> " + dir + " - Speed: " + getSpeed() + " - Pos: " + getX() + ":" + getY() + " -> " + getPrevX() + ":" + getPrevY() );
-		
 		return dir;
 	}
 	
@@ -150,8 +148,6 @@ public class Mob extends MoveableGameItem
 	{
 		if(object instanceof RocketProjectile)
 		{
-			System.out.println( health + " : " + ((BaseProjectile)object).getDamage() );
-			
 			addDamage( ((BaseProjectile)object).getDamage(), (BaseTower)((BaseProjectile)object).getParent() );
 			
 			if(health == 0)
